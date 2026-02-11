@@ -1,17 +1,29 @@
 {
-  "name": "rich-results-scraper",
+  "name": "linkedin-scraper",
   "version": "1.0.0",
-  "description": "Web scraper using Google Rich Results Test to extract public user data",
-  "main": "scraper.js",
+  "description": "LinkedIn public profile scraper using Patchright browser automation",
+  "main": "linkedinscraper.js",
   "type": "module",
   "scripts": {
-    "start": "node scraper.js",
-    "scrape": "node scraper.js"
+    "start": "node linkedinscraper.js",
+    "scrape": "node linkedinscraper.js",
+    "scrape:headless": "HEADLESS=true node linkedinscraper.js",
+    "scrape:debug": "DEBUG=true node linkedinscraper.js",
+    "old:scrape": "node scraper.js"
   },
   "dependencies": {
+    "fs-extra": "^11.3.3",
     "patchright": "^1.48.1"
   },
   "engines": {
     "node": ">=16.0.0"
-  }
+  },
+  "keywords": [
+    "linkedin",
+    "scraper",
+    "patchright",
+    "playwright",
+    "automation",
+    "web-scraping"
+  ]
 }
