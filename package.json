@@ -1,0 +1,17 @@
+{
+  "name": "rich-results-scraper",
+  "version": "1.0.0",
+  "description": "Web scraper using Google Rich Results Test to extract public user data",
+  "main": "scraper.js",
+  "type": "module",
+  "scripts": {
+    "start": "node scraper.js",
+    "scrape": "node scraper.js"
+  },
+  "dependencies": {
+    "patchright": "^1.48.1"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}

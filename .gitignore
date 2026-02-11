@@ -1,0 +1,7 @@
+node_modules/
+linkedin_public_data.json
+.env
+.DS_Store
+*.log
+screenshots/
+.env.example
