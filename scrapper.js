@@ -47,6 +47,62 @@ import fs from 'fs-extra';
             .filter(t => t.length > 25)
         )];
       };
+
+      const parseOneLineExperience = (arr) => {
+        return arr.map(item => {
+          // Normalize spacing
+          const text = item.replace(/\s+/g, " ").trim();
+      
+          // Match date ranges like:
+          // Jan 2025 - Present
+          // 2006 - 2009
+          const durationMatch = text.match(
+            /(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)?\s?\d{4}\s-\s(Present|\w+\s?\d{4})/
+          );
+      
+          const duration = durationMatch ? durationMatch[0] : null;
+      
+          // Match total time like "1 year 2 months"
+          const totalTimeMatch = text.match(/\d+\s+year[s]?\s*\d*\s*month[s]?/i);
+          const total_time = totalTimeMatch ? totalTimeMatch[0] : null;
+      
+          // Remove duration + time from original string
+          let clean = text
+            .replace(duration || "", "")
+            .replace(total_time || "", "")
+            .trim();
+      
+          // First word(s) = role
+          const words = clean.split(" ");
+      
+          // Heuristic:
+          // Role is usually first 1–3 words until capitalized company starts
+          let role = words[0];
+          let company = words.slice(1).join(" ");
+      
+          // Better split: detect first capitalized company phrase
+          const parts = clean.split(" ");
+          let splitIndex = 1;
+      
+          for (let i = 1; i < parts.length; i++) {
+            if (parts[i][0] === parts[i][0].toUpperCase()) {
+              splitIndex = i;
+              break;
+            }
+          }
+      
+          role = parts.slice(0, splitIndex).join(" ");
+          company = parts.slice(splitIndex).join(" ");
+      
+          return {
+            role,
+            company,
+            duration,
+            total_time
+          };
+        });
+      };
+      
       
   
     return {
@@ -62,7 +118,8 @@ import fs from 'fs-extra';
       education_top: text('[data-section="educationsDetails"] span'),
   
       // DEEP SECTIONS (may or may not exist)
-      experience: getSectionByHeading("Experience"),
+      experience: parseOneLineExperience(
+        getSectionByHeading("Experience")),
       education: getSectionByHeading("Education"),
       skills: getSectionByHeading("Skills"),
       activity: getSectionByHeading("Activity"),
