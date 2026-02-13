@@ -43,7 +43,7 @@ The scraper is designed to work only with information that is accessible to logg
 ```
 linkedin-scraper/
 │
-├── scraper.js          # Main scraping script
+├── scrapper.js          # Main scraping script
 ├── profile.json        # Output file (auto-created)
 ├── package.json
 └── README.md
@@ -72,7 +72,7 @@ npm install patchright fs-extra
 Run the scraper with a LinkedIn profile URL:
 
 ```bash
-node scraper.js https://www.linkedin.com/in/username/
+node scrapper.js https://www.linkedin.com/in/username/
 ```
 
 Each run will:
