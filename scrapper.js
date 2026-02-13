@@ -53,9 +53,6 @@ import fs from 'fs-extra';
           // Normalize spacing
           const text = item.replace(/\s+/g, " ").trim();
       
-          // Match date ranges like:
-          // Jan 2025 - Present
-          // 2006 - 2009
           const durationMatch = text.match(
             /(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)?\s?\d{4}\s-\s(Present|\w+\s?\d{4})/
           );
